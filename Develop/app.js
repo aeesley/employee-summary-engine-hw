@@ -12,6 +12,28 @@ const render = require("./lib/htmlRenderer");
 
 var teamMembers = [] // Creating an array where we will save all team members that were created
 
+
+const mainQuestions = [
+    {
+        name: 'id',
+        type: 'input',
+        message: 'What is your employee ID?'
+    },
+    {
+        name: 'name',
+        type: 'input',
+        message: 'What is your name?'
+    },
+    {
+        name: 'email',
+        type: 'input',
+        message: 'What is your email address?'
+    }
+]
+
+
+
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
