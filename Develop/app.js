@@ -12,7 +12,7 @@ const render = require("./lib/htmlRenderer");
 
 var teamMembers = [] // Creating an array where we will save all team members that were created
 
-
+// array holding main questions (base questions all employees must answer)
 const mainQuestions = [
     {
         name: 'id',
@@ -28,11 +28,23 @@ const mainQuestions = [
         name: 'email',
         type: 'input',
         message: 'What is your email address?'
+    },
+    {
+        name: 'role',
+        type: 'list',
+        choices: ["Manager", "Engineer", "Intern"]
     }
 ]
 
+function startQuestions () {
+    console.log('start questions is here!')
+    inquirer.prompt(mainQuestions)
+    .then(function(data) {
+        console.log(data);
+    })
+}
 
-
+startQuestions();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
