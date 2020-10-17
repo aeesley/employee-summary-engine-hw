@@ -32,17 +32,55 @@ const mainQuestions = [
     {
         name: 'role',
         type: 'list',
+        message: 'Please select your current role below',
         choices: ["Manager", "Engineer", "Intern"]
     }
 ]
 
+const managerQuestions = [
+    {
+        name: 'officeNumber',
+        type: 'input',
+        message: 'What is your office phone number?'
+    }
+]
+
+const engineerQuestions = [
+    {
+        name: 'github',
+        type: 'input',
+        message: 'What is your Github username?'
+    }
+]
+
+const internQuestions = [
+    {
+        name: 'school',
+        type: 'input',
+        message: 'What school do you attend?'
+    }
+]
+
+
+
 function startQuestions () {
+    const roleInput = mainQuestions[3].choices;
+
     console.log('start questions is here!')
     inquirer.prompt(mainQuestions)
     .then(function(data) {
         console.log(data);
     })
+        // if (roleInput === "Manager") {
+        //     inquirer.prompt(managerQuestions)
+        //     .then(function(data){
+        //     console.log(data);
+        // })
 }
+
+// if (role === "Manager") {
+//     inquirer.prompt(managerQuestions);
+// }
 
 startQuestions();
 
