@@ -15,5 +15,5 @@ class Engineer extends Employee {
     }
 
 }
-// Allowing the Manager data to be exported
+// Allowing the Engineer data to be exported
 module.exports = Engineer
