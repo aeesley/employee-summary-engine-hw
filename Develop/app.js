@@ -72,8 +72,19 @@ function startQuestions () {
 
         if (data.role === "Manager") {
             inquirer.prompt(managerQuestions)
-            .then(function(data){
-            console.log(data);
+            .then(function(managerData){
+            console.log(managerData);
+        })
+
+        } else if (data.role === "Engineer") {
+            inquirer.prompt(engineerQuestions)
+            .then(function(engineerData){
+            console.log(engineerData);
+        }) 
+        } else if (data.role === "Intern") {
+            inquirer.prompt(internQuestions)
+            .then(function(internData){
+            console.log(internData);
         })
 
     }
