@@ -64,18 +64,21 @@ const internQuestions = [
 
 
 function startQuestions () {
-    const roleInput = mainQuestions[3].choices;
 
     console.log('start questions is here!')
     inquirer.prompt(mainQuestions)
     .then(function(data) {
         console.log(data);
-    })
-        // if (roleInput === "Manager") {
-        //     inquirer.prompt(managerQuestions)
-        //     .then(function(data){
-        //     console.log(data);
-        // })
+
+        if (data.role === "Manager") {
+            inquirer.prompt(managerQuestions)
+            .then(function(data){
+            console.log(data);
+        })
+
+    }
+
+});
 }
 
 // if (role === "Manager") {
