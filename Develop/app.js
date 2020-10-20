@@ -36,7 +36,7 @@ const mainQuestions = [
         choices: ["Manager", "Engineer", "Intern"]
     }
 ]
-
+// extra question only asked to manager
 const managerQuestions = [
     {
         name: 'officeNumber',
@@ -44,7 +44,7 @@ const managerQuestions = [
         message: 'What is your office phone number?'
     }
 ]
-
+// extra questions only asked to engineers
 const engineerQuestions = [
     {
         name: 'github',
@@ -52,7 +52,7 @@ const engineerQuestions = [
         message: 'What is your Github username?'
     }
 ]
-
+// extra question only asked to intern
 const internQuestions = [
     {
         name: 'school',
@@ -60,12 +60,30 @@ const internQuestions = [
         message: 'What school do you attend?'
     }
 ]
+// function to save Manager data and push Manager data to teamMembers array
+function createNewManager (data, managerData) {
+    var myNewManager = new Manager(data.id, data.name, data.email, managerData.officeNumber);
+    teamMembers.push(myNewManager);
+    console.log(teamMembers);
+};
 
+// function to save engineer data and push Engineer data to teamMembers array
+function createNewEngineer (data, engineerData) {
+    var myNewEngineer = new Engineer(data.id, data.name, data.email, engineerData.github);
+    teamMembers.push(myNewEngineer);
+    console.log(teamMembers);
+};
 
+// function to save intern data and push Intern data to teamMembers array
+function createNewIntern (data, internData) {
+    var myNewIntern = new Intern(data.id, data.name, data.email, internData.school);
+    teamMembers.push(myNewIntern);
+    console.log(teamMembers);
+};
 
+// function that asks all the base level questions, and then asks the additional question based on their role selection
 function startQuestions () {
 
-    console.log('start questions is here!')
     inquirer.prompt(mainQuestions)
     .then(function(data) {
         console.log(data);
@@ -74,27 +92,23 @@ function startQuestions () {
             inquirer.prompt(managerQuestions)
             .then(function(managerData){
             console.log(managerData);
-        })
-
+            createNewManager();
+            });
         } else if (data.role === "Engineer") {
             inquirer.prompt(engineerQuestions)
             .then(function(engineerData){
             console.log(engineerData);
-        }) 
+            createNewEngineer();
+            }); 
         } else if (data.role === "Intern") {
             inquirer.prompt(internQuestions)
             .then(function(internData){
             console.log(internData);
-        })
-
+            createNewIntern();
+            });
     }
-
 });
 }
-
-// if (role === "Manager") {
-//     inquirer.prompt(managerQuestions);
-// }
 
 startQuestions();
 
