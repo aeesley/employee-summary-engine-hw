@@ -72,25 +72,23 @@ const addAnotherQuestions = [
     }
 ]
 
-
+// function that pushes data to HTML once the user selects that they do not want to add any more users
 function populateHTML() {
     var rawHtml = render(teamMembers)
     fs.writeFile(outputPath, rawHtml, function(err) {
-        console.log('eer ??', err)
+        console.log(err)
     })
 
 }
 
-
+// Function that starts the whole questions loop back over if they select that they want to add another
 function addAnother() {
     inquirer.prompt(addAnotherQuestions).then(function(anotherData) {
-        console.log('.then for add another data!!!', anotherData);
+        console.log(anotherData);
 
         if(anotherData.addAnother === true) {
-            console.log('DO A NOTHER!!')
             startQuestions();
         } else {
-            console.log('TIME TO STOP!!!!!')
             populateHTML()
         }
 
@@ -102,6 +100,7 @@ function createNewManager (data, managerData) {
     var myNewManager = new Manager(data.id, data.name, data.email, managerData.officeNumber);
     teamMembers.push(myNewManager);
     console.log('team memberssss', teamMembers);
+    // prompts add another question function to see whether they want to add another or stop
     addAnother();
 };
 
@@ -110,6 +109,7 @@ function createNewEngineer (data, engineerData) {
     var myNewEngineer = new Engineer(data.id, data.name, data.email, engineerData.github);
     teamMembers.push(myNewEngineer);
     console.log('team memberssss',teamMembers);
+    // prompts add another question function to see whether they want to add another or stop
     addAnother();
 };
 
@@ -118,6 +118,7 @@ function createNewIntern (data, internData) {
     var myNewIntern = new Intern(data.id, data.name, data.email, internData.school);
     teamMembers.push(myNewIntern);
     console.log('team memberssss', teamMembers);
+    // prompts add another question function to see whether they want to add another or stop
     addAnother();
  
 };
@@ -128,13 +129,14 @@ function startQuestions () {
 
     inquirer.prompt(mainQuestions).then(function(data) {
         console.log(data);
-
+        // asks manager specific question and then calls the function to generate new manager and push to array
         if (data.role === "Manager") {
             inquirer.prompt(managerQuestions).then(function(managerData){
                 console.log(managerData);
                 createNewManager(data, managerData);
 
             });
+        // asks engineer specific question and then calls the function to generate new engineer and push to array
         } else if (data.role === "Engineer") {
             inquirer.prompt(engineerQuestions)
             .then(function(engineerData){
@@ -143,6 +145,8 @@ function startQuestions () {
 
             createNewEngineer(data, engineerData);
             }); 
+
+        // asks intern specific question and then calls the function to generate new intern and push to array
         } else if (data.role === "Intern") {
             inquirer.prompt(internQuestions)
             .then(function(internData){
@@ -156,28 +160,5 @@ function startQuestions () {
 
 
 
-
+// calls the function that starts the whole process
 startQuestions();
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
