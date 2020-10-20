@@ -60,55 +60,89 @@ const internQuestions = [
         message: 'What school do you attend?'
     }
 ]
+
+// extra question only asked to intern
+const addAnotherQuestions = [
+    {
+        name: 'addAnother',
+        type: 'confirm',
+        message: 'Would you like to add another?'
+    }
+]
+
+function addAnother() {
+    inquirer.prompt(addAnotherQuestions).then(function(anotherData) {
+        console.log('.then for add another data!!!', anotherData);
+
+        if(anotherData.addAnother === true) {
+            console.log('DO A NOTHER!!')
+            startQuestions();
+        } else {
+            console.log('TIME TO STOP!!!!!')
+        }
+
+    })
+
+}
 // function to save Manager data and push Manager data to teamMembers array
 function createNewManager (data, managerData) {
     var myNewManager = new Manager(data.id, data.name, data.email, managerData.officeNumber);
     teamMembers.push(myNewManager);
-    console.log(teamMembers);
+    console.log('team memberssss', teamMembers);
+    addAnother();
 };
 
 // function to save engineer data and push Engineer data to teamMembers array
 function createNewEngineer (data, engineerData) {
     var myNewEngineer = new Engineer(data.id, data.name, data.email, engineerData.github);
     teamMembers.push(myNewEngineer);
-    console.log(teamMembers);
+    console.log('team memberssss',teamMembers);
+    addAnother();
 };
 
 // function to save intern data and push Intern data to teamMembers array
 function createNewIntern (data, internData) {
     var myNewIntern = new Intern(data.id, data.name, data.email, internData.school);
     teamMembers.push(myNewIntern);
-    console.log(teamMembers);
+    console.log('team memberssss', teamMembers);
+    addAnother();
+ 
 };
+
 
 // function that asks all the base level questions, and then asks the additional question based on their role selection
 function startQuestions () {
 
-    inquirer.prompt(mainQuestions)
-    .then(function(data) {
+    inquirer.prompt(mainQuestions).then(function(data) {
         console.log(data);
 
         if (data.role === "Manager") {
-            inquirer.prompt(managerQuestions)
-            .then(function(managerData){
-            console.log(managerData);
-            createNewManager();
+            inquirer.prompt(managerQuestions).then(function(managerData){
+                console.log(managerData);
+                createNewManager(data, managerData);
+
             });
         } else if (data.role === "Engineer") {
             inquirer.prompt(engineerQuestions)
             .then(function(engineerData){
             console.log(engineerData);
-            createNewEngineer();
+
+
+            createNewEngineer(data, engineerData);
             }); 
         } else if (data.role === "Intern") {
             inquirer.prompt(internQuestions)
             .then(function(internData){
             console.log(internData);
-            createNewIntern();
+            createNewIntern(data, internData);
             });
     }
-});
+
+})
 }
+
+
+
 
 startQuestions();
 
