@@ -1,6 +1,6 @@
 // This Employee class has the general info all employees will have and creates a constructor to house all of this data. This class will then be extended to all the employee types.
 class Employee {
-    constructor(id, name, email) {
+    constructor(name, id, email) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -16,7 +16,7 @@ class Employee {
         return this.email
     }
     getRole() {
-        return Employee
+        return "Employee"
     }
 }
 // Allowing the Employee data to be exported

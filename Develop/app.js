@@ -12,6 +12,8 @@ const render = require("./lib/htmlRenderer");
 
 var teamMembers = [] // Creating an array where we will save all team members that were created
 
+
+
 // array holding main questions (base questions all employees must answer)
 const mainQuestions = [
     {
@@ -70,6 +72,16 @@ const addAnotherQuestions = [
     }
 ]
 
+
+function populateHTML() {
+    var rawHtml = render(teamMembers)
+    fs.writeFile(outputPath, rawHtml, function(err) {
+        console.log('eer ??', err)
+    })
+
+}
+
+
 function addAnother() {
     inquirer.prompt(addAnotherQuestions).then(function(anotherData) {
         console.log('.then for add another data!!!', anotherData);
@@ -79,6 +91,7 @@ function addAnother() {
             startQuestions();
         } else {
             console.log('TIME TO STOP!!!!!')
+            populateHTML()
         }
 
     })
