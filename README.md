@@ -7,7 +7,7 @@ DESCRIPTION
 We were tasked with created an employee summary HTML Page generating the input and data directly from node.js. We were working specifically on using Classes, Constructors, and also getting started with running tests. When the program is initiated the end user is asked to enter employee information. When they are finished entering in employee information, that information is displayed on an HTML page.
 
 SCREENSHOTS
-![homepage](./homepage.png)
+![homepage](./Assets/homepage.png)
 
 TECHNOLOGY
 Node.js, Javascript, Inquirer, Jest
